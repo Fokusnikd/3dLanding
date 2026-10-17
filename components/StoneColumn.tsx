@@ -3,6 +3,7 @@
 import { useEffect, useMemo } from "react";
 import { useTexture } from "@react-three/drei";
 import * as THREE from "three";
+import { asset } from "@/lib/asset";
 
 // Каменная колонна на фасад и в зал. Картинки из Figma (public/facade/kit/columns/) дают камень и тени,
 // а форма настоящая: рифлёный ствол с желобками в геометрии, база — тело вращения по контуру картинки с плинтусом-блоком,
@@ -97,9 +98,9 @@ type Props = {
 export default function StoneColumn({ d, top, tint = "#ffffff", glow = 0.1 }: Props) {
   const m = useMemo(() => dims(d, top), [d, top]);
   const ry = m.shaftH / ((Math.PI * d) / WRAPS);
-  const shaftTex = useStoneTexture("/facade/kit/columns/column_shaft.webp", WRAPS);
-  const baseTex = useStoneTexture("/facade/kit/columns/column_base.webp");
-  const capTex = useStoneTexture("/facade/kit/columns/column_capital.webp");
+  const shaftTex = useStoneTexture(asset("/facade/kit/columns/column_shaft.webp"), WRAPS);
+  const baseTex = useStoneTexture(asset("/facade/kit/columns/column_base.webp"));
+  const capTex = useStoneTexture(asset("/facade/kit/columns/column_capital.webp"));
 
   const geo = useMemo(() => {
     const r = d / 2;

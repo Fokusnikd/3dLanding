@@ -4,6 +4,7 @@ import { useEffect, useMemo } from "react";
 import { useTexture } from "@react-three/drei";
 import * as THREE from "three";
 import { useKtx2 } from "./ktx2";
+import { asset } from "@/lib/asset";
 
 // Наборы PBR-текстур из public/textures/<set>/ (Poly Haven, CC0): цвет, нормали, шероховатость, затенение в щелях.
 export type PBRSet = "hall_wall" | "hall_floor" | "marble" | "walnut" | "panel";
@@ -14,7 +15,7 @@ const WEBP_DIFF: PBRSet[] = ["panel"];
 
 function usePBRTextures(set: PBRSet): [THREE.Texture, THREE.Texture, THREE.Texture, THREE.Texture] {
   const webpDiff = WEBP_DIFF.includes(set);
-  const dir = `/textures/${set}`;
+  const dir = asset(`/textures/${set}`);
   const ktx = useKtx2(webpDiff ? [`${dir}/nor.ktx2`, `${dir}/rough.ktx2`, `${dir}/ao.ktx2`] : [`${dir}/diff.ktx2`, `${dir}/nor.ktx2`, `${dir}/rough.ktx2`, `${dir}/ao.ktx2`]);
   const webp = useTexture(webpDiff ? [`${dir}/diff.webp`] : []);
   return webpDiff ? [webp[0], ktx[0], ktx[1], ktx[2]] : [ktx[0], ktx[1], ktx[2], ktx[3]];

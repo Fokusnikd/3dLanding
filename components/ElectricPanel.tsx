@@ -10,12 +10,13 @@ import { PANEL } from "@/lib/gallery";
 import { panelDoor } from "./controls";
 import { pbrBox } from "./pbr";
 import PanelScreen from "./PanelScreen";
+import { asset } from "@/lib/asset";
 
 // Электрощиток на стене: стальной шкаф с дверцей на левых петлях. Клик подлетает к нему камерой и распахивает дверцу
 // (panelDoor 0 → 1, им управляет Scene): внутри на дисплее рисуется статистика ассетов и оптимизации (PanelScreen).
 // Текстуры — public/textures/breaker_box (готовит scripts/optimize-panel.mjs из картинок ChatGPT, см. orders/electric-panel-chatgpt.md).
 // Лицо смотрит в +z группы, поэтому группу разворачивают к залу.
-const DIR = "/textures/breaker_box";
+const DIR = asset("/textures/breaker_box");
 const OPEN_ANGLE = 2.0; // рад: насколько распахивается дверца (~115°)
 const TILE = 0.5; // метров стали и цинка на одну плитку текстуры
 const INNER = "#1c201d";

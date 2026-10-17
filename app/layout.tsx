@@ -5,6 +5,7 @@ import { profile } from "@/lib/content";
 import MotionProvider from "@/components/MotionProvider";
 import Aurora from "@/components/Aurora";
 import SceneLoader from "@/components/SceneLoader";
+import { asset } from "@/lib/asset";
 
 const display = Cormorant_Garamond({
   variable: "--font-display",
@@ -30,7 +31,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="ru" className={`${display.variable} ${sans.variable}`}>
-      <body>
+      <body style={{ "--glass-smudge": `url(${asset("/textures/breaker_box/glass_smudge.webp")})` } as React.CSSProperties}>
         <Aurora />
         <SceneLoader />
         <MotionProvider>{children}</MotionProvider>

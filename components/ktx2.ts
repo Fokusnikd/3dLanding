@@ -4,10 +4,11 @@ import { use } from "react";
 import { useThree } from "@react-three/fiber";
 import type * as THREE from "three";
 import { KTX2Loader } from "three/examples/jsm/loaders/KTX2Loader.js";
+import { asset } from "@/lib/asset";
 
 // KTX2 (Basis): текстуры остаются сжатыми в видеопамяти (в 4–6 раз меньше, чем WebP после распаковки).
 // Транскодер лежит в public/basis (копия three/examples/jsm/libs/basis).
-const TRANSCODER_PATH = "/basis/";
+const TRANSCODER_PATH = asset("/basis/");
 
 let shared: KTX2Loader | null = null;
 
