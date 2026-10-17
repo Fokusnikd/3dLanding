@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# mypage — 3D-портфолио
 
-## Getting Started
+Интерактивное портфолио в виде 3D-комнаты (фасад, зал с картинами, статуи, электрощиток со статистикой ассетов).
+Стек: Next.js 16, React 19, three.js, @react-three/fiber / drei, motion.
 
-First, run the development server:
+## Запуск
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # продакшн-сборка
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Структура
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Папка | Что внутри |
+| --- | --- |
+| `app/` | страницы и глобальные стили |
+| `components/` | 3D-сцена, комната, галерея, оверлеи, UI |
+| `lib/` | контент (`content.ts` — плейсхолдеры, замените на свои данные) и данные галереи |
+| `public/` | оптимизированные ассеты: модели (`.glb`), текстуры (KTX2/WebP), transcoder |
+| `scripts/` | пайплайн оптимизации моделей и текстур, Blender-скрипты |
+| `orders/` | ТЗ на генерацию текстур (ChatGPT) |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Ассеты
 
-## Learn More
+Исходники (`.blend`, оригиналы текстур, AI-генерации; ~550 МБ) в репозиторий **не входят** — папка `assets-src/` в `.gitignore`.
+В `public/` лежит уже оптимизированный результат, для запуска сайта исходники не нужны.
 
-To learn more about Next.js, take a look at the following resources:
+Скрипты оптимизации (нужны исходники в `assets-src/`):
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run optimize:models   # сжатие GLB
+npm run optimize:panel    # текстуры электрощитка
+npm run stats:assets      # статистика по размерам ассетов
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Скрипты `scripts/*.py` запускаются внутри Blender.

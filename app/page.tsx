@@ -1,69 +1,41 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import Nav from "@/components/Nav";
+import { jobs, profile, showcase } from "@/lib/content";
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
+    <>
+      <Nav />
+      {/* Страница не прокручивается: колесо, тачпад, свайп и клавиши ведут камеру (см. components/controls.ts) */}
+      <main id="top">
+        {/* Текстовая версия для поисковиков и скринридеров: видимый контент живёт в 3D-сцене */}
+        <div className="sr-only">
           <h1>
-            To get started, edit the{" "}
-            <code className={styles.code}>page.tsx</code> file.
+            {profile.name} — {profile.role}
           </h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          <p>{profile.intro}</p>
+          <ul>
+            {jobs.map((j) => (
+              <li key={j.id}>
+                {j.company} ({j.period}) — {j.role}, {j.product}. {j.summary}
+                <ul>
+                  {j.tasks.map((t) => (
+                    <li key={t.text}>{t.text}</li>
+                  ))}
+                </ul>
+                <p>Стек: {j.stack.join(", ")}</p>
+              </li>
+            ))}
+          </ul>
+          <ul>
+            {showcase.map((g) => (
+              <li key={g.id}>
+                {g.title} — {g.blurb}
+              </li>
+            ))}
+          </ul>
+          <a href={`mailto:${profile.email}`}>{profile.email}</a>
         </div>
       </main>
-    </div>
+    </>
   );
 }

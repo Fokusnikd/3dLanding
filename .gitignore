@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# heavy source assets (blend files, originals, AI generations) - kept locally only
+/assets-src/
+*.blend1
+
+# local Claude tooling worktrees
+/.claude/worktrees/

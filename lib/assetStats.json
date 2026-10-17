@@ -1,0 +1,75 @@
+{
+  "generatedAt": "2026-10-16T01:32:25.619Z",
+  "models": [
+    {
+      "name": "emblem_js",
+      "beforeBytes": 10581040,
+      "afterBytes": 129276,
+      "trisBefore": 351296,
+      "trisAfter": 19197
+    },
+    {
+      "name": "emblem_next",
+      "beforeBytes": 12625220,
+      "afterBytes": 138508,
+      "trisBefore": 409144,
+      "trisAfter": 15121
+    },
+    {
+      "name": "emblem_playwright",
+      "beforeBytes": 7902780,
+      "afterBytes": 106280,
+      "trisBefore": 259354,
+      "trisAfter": 19888
+    },
+    {
+      "name": "lantern",
+      "beforeBytes": 3912136,
+      "afterBytes": 300856,
+      "trisBefore": 25028,
+      "trisAfter": 25028
+    },
+    {
+      "name": "statue_boardgames",
+      "beforeBytes": 7412592,
+      "afterBytes": 844076,
+      "trisBefore": 119991,
+      "trisAfter": 19950
+    },
+    {
+      "name": "statue_climbing",
+      "beforeBytes": 7146476,
+      "afterBytes": 805988,
+      "trisBefore": 119994,
+      "trisAfter": 19950
+    },
+    {
+      "name": "statue_fencing",
+      "beforeBytes": 6603304,
+      "afterBytes": 818328,
+      "trisBefore": 119994,
+      "trisAfter": 19937
+    },
+    {
+      "name": "statue_games",
+      "beforeBytes": 7147012,
+      "afterBytes": 832200,
+      "trisBefore": 119990,
+      "trisAfter": 19904
+    }
+  ],
+  "facade": {
+    "files": 17,
+    "beforeBytes": 15218299,
+    "afterBytes": 1517170
+  },
+  "textures": {
+    "maps": 20,
+    "sets": 5,
+    "jpgBytes": 8030991,
+    "webpBytes": 1363570,
+    "shippedBytes": 4349562,
+    "vramRawBytes": 145402539,
+    "vramCompressedBytes": 40544939
+  }
+}
