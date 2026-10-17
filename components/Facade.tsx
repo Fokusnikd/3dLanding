@@ -12,6 +12,7 @@ import { HERO_PLACEHOLDER } from "./heroPlaceholder";
 import { applyMist, mistSignals } from "./MistLayer";
 import { useSharedPBR } from "./pbr";
 import StoneColumn from "./StoneColumn";
+import { asset } from "@/lib/asset";
 
 // Фасад — цельный кадр центра дома (public/facade/kit/hero.webp, 4096 px) с вырезом под дверь, края растушёваны в тёмную стену.
 // Масштаб по проёму портала на картинке: 583 × 1195 px = DOOR_W × DOOR_H метров (по осям отдельно).
@@ -120,13 +121,13 @@ function SideBays() {
   const G_H = 1406 * 0.0044; // высота плитки в метрах
   const G_YB = -0.634; // мировая высота низа плитки
   const ground = useKit(
-    "/facade/kit/side_ground.webp",
+    asset("/facade/kit/side_ground.webp"),
     [(HALF - SIDE_X0) / PITCH, BAND_Y / G_H],
     [0, -G_YB / G_H],
     true,
   );
   const upper = useKit(
-    "/facade/kit/side_upper.webp",
+    asset("/facade/kit/side_upper.webp"),
     [(HALF - SIDE_X0) / PITCH, 1],
     undefined,
     true,
@@ -170,7 +171,7 @@ function SideBays() {
 // Объёмный фонарь: модель из Blender (public/models/lantern.glb), слеплена по чертежу. Начало координат — на стене,
 // на оси фонаря; нижний кончик капли на нуле, поэтому ставим его на высоту кончика на фасаде.
 function Lantern({ cx }: { cx: number }) {
-  const { scene } = useGLTF("/models/lantern.glb");
+  const { scene } = useGLTF(asset("/models/lantern.glb"));
   const model = useMemo(() => scene.clone(true), [scene]);
   // туман загрузки подмешивается в материалы до первой компиляции (она идёт после эффектов детей, в прогреве этапа)
   useEffect(() => applyMist(model, "lanterns"), [model]);
@@ -235,10 +236,10 @@ export function FacadeHero() {
   }, []);
   useEffect(() => () => placeholder.dispose(), [placeholder]);
 
-  const hero = useLazyTexture("/facade/kit/hero.webp", true);
+  const hero = useLazyTexture(asset("/facade/kit/hero.webp"), true);
   // карту рельефа берём только после кадра, чтобы не отнимать у него канал
   const heroNormal = useLazyTexture(
-    hero ? "/facade/kit/hero_normal.webp" : "",
+    hero ? asset("/facade/kit/hero_normal.webp") : "",
     false,
   );
   const normalScale = useMemo(() => new THREE.Vector2(1.4, 1.4), []);
@@ -545,19 +546,19 @@ function Leaf({
 // Дверь как настоящая: коробка (арочная фрамуга со стеклом) неподвижна, а две створки на петлях по краям проёма
 // открываются внутрь зала. Рычажные ручки нажимаются. Стёкла 3D, сквозь них видна комната. Анимация идёт от прогресса скролла.
 function Door({ progress }: { progress: MotionValue<number> }) {
-  const transom = useKit("/facade/kit/door_transom.webp");
-  const outer = useKit("/facade/kit/door_outer.webp");
-  const inner = useKit("/facade/kit/door_inner.webp");
+  const transom = useKit(asset("/facade/kit/door_transom.webp"));
+  const outer = useKit(asset("/facade/kit/door_outer.webp"));
+  const inner = useKit(asset("/facade/kit/door_inner.webp"));
   const normal = useKit(
-    "/facade/kit/door_outer_normal.webp",
+    asset("/facade/kit/door_outer_normal.webp"),
     undefined,
     undefined,
     false,
     false,
   );
   // плашка и рычаг одни на все четыре ручки (раньше каждая ручка клонировала обе текстуры)
-  const plate = useKit("/facade/kit/handle_plate.webp");
-  const lever = useKit("/facade/kit/handle_lever.webp");
+  const plate = useKit(asset("/facade/kit/handle_plate.webp"));
+  const lever = useKit(asset("/facade/kit/handle_lever.webp"));
   const left = useRef<THREE.Group>(null);
   const right = useRef<THREE.Group>(null);
   const levers = useRef<{ el: THREE.Group; dl: number }[]>([]);
@@ -684,8 +685,8 @@ function Door({ progress }: { progress: MotionValue<number> }) {
 
 // Улица: плиты тротуара, бордюр и асфальт — из сгенерированных текстур
 function Street() {
-  const walkTex = useKit("/facade/kit/sidewalk.webp", [90 / 2.4, 4.6 / 2.4]);
-  const roadTex = useKit("/facade/kit/asphalt.webp", [90 / 6, 56 / 6]);
+  const walkTex = useKit(asset("/facade/kit/sidewalk.webp"), [90 / 2.4, 4.6 / 2.4]);
+  const roadTex = useKit(asset("/facade/kit/asphalt.webp"), [90 / 6, 56 / 6]);
   return (
     <group>
       <mesh

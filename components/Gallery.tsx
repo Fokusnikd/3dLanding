@@ -27,6 +27,7 @@ import StoneColumn from "./StoneColumn";
 import { pbrBox } from "./pbr";
 import { getKtx2Loader } from "./ktx2";
 import BrassPlate from "./BrassPlate";
+import { asset } from "@/lib/asset";
 
 // Палитра «тёмная галерея»: английский зелёный, тёмный орех, латунь
 const WALNUT = "#150d08";
@@ -78,8 +79,8 @@ function Column({ pos, flip }: { pos: V3; flip?: boolean }) {
 
 // ───────── Профили стен: плинтус и карниз из картинок (public/facade/kit/hall), бесшовно по длине ─────────
 // Картинка — вырезанная полоса профиля; высоту задаём мы, длину одной плитки считаем из пропорций, чтобы профиль не растягивался.
-const BASEBOARD = { src: "/facade/kit/hall/baseboard.webp", aspect: 1316 / 261, h: 0.38 };
-const CORNICE = { src: "/facade/kit/hall/cornice.webp", aspect: 1536 / 374, h: 0.65 };
+const BASEBOARD = { src: asset("/facade/kit/hall/baseboard.webp"), aspect: 1316 / 261, h: 0.38 };
+const CORNICE = { src: asset("/facade/kit/hall/cornice.webp"), aspect: 1536 / 374, h: 0.65 };
 
 function Trim({
   spec,
@@ -203,7 +204,7 @@ type Hobby = "fencing" | "games" | "climbing" | "boardgames";
 function Statue({ kind }: { kind: Hobby }) {
   const gl = useThree((s) => s.gl);
   // Текстуры статуй в KTX2 (KHR_texture_basisu): GLTFLoader нужен общий KTX2Loader.
-  const { scene } = useGLTF(`/models/statue_${kind}.glb`, true, true, (loader) => {
+  const { scene } = useGLTF(asset(`/models/statue_${kind}.glb`), true, true, (loader) => {
     // GLTFLoader в drei из three-stdlib: его тип KTX2Loader отличается от three/examples лишь сигнатурой dispose()
     loader.setKTX2Loader(getKtx2Loader(gl) as unknown as Parameters<typeof loader.setKTX2Loader>[0]);
   });

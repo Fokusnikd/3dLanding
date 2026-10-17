@@ -1063,7 +1063,7 @@ body.in-case .nav {
   content: "";
   position: absolute;
   inset: 0;
-  background: url("/textures/breaker_box/glass_smudge.webp") center / cover;
+  background: var(--glass-smudge) center / cover;
   mix-blend-mode: screen;
   opacity: 0.5;
   pointer-events: none;

@@ -1,4 +1,5 @@
 // ВСЁ, ЧТО НИЖЕ — ПЛЕЙСХОЛДЕРЫ. Замените на свои данные.
+import { asset } from "@/lib/asset";
 
 export const profile = {
   name: "Ваше Имя",
@@ -19,7 +20,7 @@ export const profile = {
     { label: "Behance", href: "https://behance.net/" },
   ],
   // Положите свой файл в public/cv.pdf или замените ссылку
-  cv: { label: "Скачать CV", href: "/cv.pdf" },
+  cv: { label: "Скачать CV", href: asset("/cv.pdf") },
 };
 
 export const stats = [

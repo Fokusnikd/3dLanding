@@ -10,6 +10,7 @@ import { statueApi, statueFocus } from "./controls";
 import Spot from "./Spot";
 import BrassPlate from "./BrassPlate";
 import { pbrBox, scaleUV, useSharedPBR } from "./pbr";
+import { asset } from "@/lib/asset";
 
 // Левая стена «Инструментарий». Локальные оси группы: +x — вправо с точки зрения камеры, +z — от стены в зал, y — вверх.
 const BRASS = "#b8924f";
@@ -295,9 +296,9 @@ function ReactShape() {
 // Сделаны по листам с четырьмя видами (ChatGPT) в ComfyUI (Hunyuan3D 2.0 MV), цвет перенесён с видов, доведены в Blender.
 // Начало координат — центр модели, лицо смотрит в +z.
 const EMBLEMS = {
-  javascript: "/models/emblem_js.glb",
-  testing: "/models/emblem_playwright.glb",
-  next: "/models/emblem_next.glb",
+  javascript: asset("/models/emblem_js.glb"),
+  testing: asset("/models/emblem_playwright.glb"),
+  next: asset("/models/emblem_next.glb"),
 };
 
 // Подгружает все три эмблемы разом (суспендит), чтобы витрины потом показали их без паузы. Без preload на уровне модуля.
